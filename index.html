@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <title>Invoice Generator</title>
+</head>
+
+<body>
+    <button>
+        Point Of Sales<link rel="stylesheet" href="POS.html">
+    </button>
+    <div id="invoice-form">
+        <h2>Invoice</h2>
+        <div class="invoice-details">
+            <div class="invoice-data">
+                <div class="invoice-number">
+                    <label for="invoice-number"> Invoice Number: </label>
+                    <input type="text" id="invoice-number"  />
+                </div>
+                <div class="invoice-date">
+                    <label for="invoice-date"> Invoice Date: </label>
+                    <input type="date" id="invoice-date" />
+                </div>
+                <div class="due-date">
+                    <label for="due-date"> Due Date: </label>
+                    <input type="date" id="due-date" />
+                </div>
+            </div>
+            <div class="client-data">
+                <div class="client-details">
+                    <label for="client-name">
+                        Client Name:
+                    </label>
+                    <input type="text" id="client-name" />
+                    <label for="client-address">
+                        Client Address:
+                    </label>
+                    <textarea id="client-address">
+
+                    </textarea>  
+                    <label for="client-contact">
+                        Client Contact:
+                    </label>
+                    <input type="text" id="client-contact" />
+                </div>
+                <div class="invoice-notes">
+                    <label for="invoice-notes">Notes:</label>
+                    <textarea id="invoice-notes"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="input-fields">
+            <input type="text" placeholder="Item Description" class="item">
+            <input type="text" placeholder="Quantity" class="quantity">
+            <input type="text" placeholder="Unit Price" class="unit-price">
+            <button id="add-item">Add Item</button>
+        </div>
+        <div class="invoice-items">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                    
+                </tbody>
+            </table>
+        </div>
+        <div class="invoice-totals">
+            <div class="subtotal">
+                <span>Subtotal:</span>
+                <span id="subtotal"></span>
+            </div>
+            <div class="tax">
+                <span>Tax:</span>
+                <span id="tax"></span>
+            </div>
+            <div class="total">
+                <span>Total:</span>
+                <span id="total"></span>
+            </div>
+        </div>
+        <input type="button" class="submit-button" value="Submit">
+    </div>
+</body>
+<script src="scripts/main.js"></script>
+
+</html>
