@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Customer Allocation Inquiry</title>
+</head>
+<body>
+    <div>
+        <label for="select-a-customer">Select a Customer:
+            <select name="customer-selector" id="customer-selector">
+                <option value="all-customer">All Customers</option>
+                <option value="kk">KK</option>
+            </select>
+        </label>
+        <label for="from">From:
+            <input type="date">
+        </label>
+        <label for="to">To:
+            <input type="date">
+        </label>
+        <label for="type">Type:
+            <select name="type-selector" id="type-selector">
+                <option value="all-types">All Types</option>
+                <option value="sales-invoices">Sales Invoices</option>
+                <option value="unsettled-transaction">Unsettled Transactions</option>
+                <option value="payments">Payments</option>
+                <option value="credit-notes">Credit Notes</option>
+                <option value="delivery-notes">Delivery Notes</option>
+                <option value="journal-entries">Journal Entries</option>
+            </select>
+        </label>
+    </div>
+    <div>
+        <table>
+            <th>Type</th>
+            <th>#</th>
+            <th>Reference</th>
+            <th>Order</th>
+            <th>Date</th>
+            <th>Due Date</th>
+            <th>Customer</th>
+            <th>Currency</th>
+            <th>Debit</th>
+            <th>Allocated</th>
+            <th>Balance</th>
+            <tbody>
+                <tr>
+                    <td colspan="12">No Records</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <a href="home.html">Back</a>
+    </div>
+</body>
+</html>

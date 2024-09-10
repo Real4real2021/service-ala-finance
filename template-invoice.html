@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Search Template for Invoicing</h1>
+    <div class="top-third">
+        <label for="#">#:
+            <input type="text" name="#" id="#">
+        </label>
+        <label for="ref">Ref:
+            <input type="text" name="ref" id="ref">
+        </label>
+        <label for="location">Location:
+            <select name="location" id="location">
+                <option value="all-locations">All Locations</option>
+                <option value="Default">Default</option>
+            </select>
+        </label>
+        <label for="item">Item:
+            <input type="text" name="item" id="item">
+        </label>
+        <select name="items-from-inventory" id="items-from-inventory">
+            <option value="all-items">All Items</option>
+            <option value="test-item-1">Test Item 1</option>
+        </select>
+        <label for="select-a-customer">Select a Customer:
+            <select name="customer-selector" id="customer-selector">
+                <option value="all-customers">All Customers</option>
+                <option value="kk">KK</option>
+                <option value="kojo">Kojo</option>
+                <option value="Kris">Kris</option>
+            </select>
+        </label>
+        <input type="button" value="Search">
+    </div>
+    <div class="mid-third">
+        <table>
+            <th>Order #</th>
+            <th>Ref</th>
+            <th>Customer</th>
+            <th>Branch</th>
+            <th>Description</th>
+            <th>Order Date</th>
+            <th>Required By</th>
+            <th>Delivery To</th>
+            <th>Order Total</th>
+            <th>Currency</th>
+            <tbody>
+                <tr>
+                    <td colspan="10">No Record</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

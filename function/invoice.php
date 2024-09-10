@@ -1,45 +1,36 @@
 <?php
-// Database connection details
-$servername = "127.0.0.1";
-$username = "";
-$password = "";
-$dbname = "serviec_de_financea";
+// require_once("../config/db_con.php");
 
-// Create connection
+$servername = "12.34.56.78";
+$username = "root";
+$password = "";
+$dbname = "service_de_financea";
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if($conn -> connect_error){
+    die("Connection failed:".$conn->connect_error);
 }
 
-// Handle form data
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get data from the form
-    $invoice_number = $_POST['invoice_number'];
-    $invoice_date = $_POST['invoice_date'];
-    $due_date=$_POST['due_date'];
-    $clientName = $_POST['clientAddress'];
-    $clientContact = $_POST['client_contact'];
-    $notes = $_POST['item_description'];
-    $quantity = $_POST['unit_price'];
-    $total = $_POST['total'];
+$data = json-decode(file_get_contents('php://input'), true);
 
-    // Prepare and execute SQL statement to insert data
-    $sql = "INSERT INTO invoices (invoiceNumber, invoiceDate, dueDate, clientName, clientAddress, clientContact, notes, itemDescription, quantity, unitPrice, total) VALUES ('invoice_number', 'invoice_date', 'due_date', 'client_address', 'client_contact', 'item_desctiption', 'unit_price', 'total')";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param($invoice_number, $invoice_date);
-    $stmt->execute();
+$invoiceNumber = $data["invoiceNumber"];
+$invoiceDate = $data["invoiceDate"];
+$dueDate = $data["dueDate"];
+$clientName = $data["clientName"];
+$clientAddress = $data["clientAddress"];
+$clientContact = $data["clientContact"];
+$notes = $data["notes"];
+$itemDescription = $data["itemDescription"];
+$quantity = $data["quantity"];
+$unitPrice = $data["unitPrice"];
 
-    // Handle success or failure
-    if ($stmt->error) {
-        // Error handling
-    } else {
-        // Success, maybe return a JSON response or redirect
-        echo json_encode(['success' => true]);
-    }
+$invoiceQuery = "INSERT INTO service_de_financea.invoices (invoiceNumber, invoiceDate, dueDate, clientName, clientAddress, clientContact, notes, itemDescription, quantity, unitPrice) VALUES ('$invoiceNumber', '$invoiceDate', '$dueDate', '$clientName', '$clientAddress', '$clientContact', '$notes', '$itemDescip', '$quantity', '$unitPrice')";
 
-    $stmt->close();
+if ($conn ->query($sql)===TRUE){
+    $response =array('success' => true );
+}else{
+    $response = array('success' => false, 'error' => $conn->error);
 }
 
-$conn->close();
+echo json_encode($response);

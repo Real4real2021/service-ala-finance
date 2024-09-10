@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Prepaid Order</title>
+</head>
+<body>
+    <div class="top-third">
+        <label for="#">#: 
+            <input type="text" name="#" id="#">
+        </label>
+        <label for="ref">Ref: 
+            <input type="text" name="ref" id="ref">
+        </label>
+        <select name="order-or-delivery" id="order-or-delivery">
+            <option value="order-date">Order Date:</option>
+            <option value="delivery-date">Delivery Date:</option>
+        </select>
+        <label for="from">From:
+            <input type="date">
+        </label>
+        <label for="to">To:
+            <input type="date">
+        </label>
+        <label for="location">Location:
+            <select name="location" id="location">
+                <option value="all-locations">All Locations</option>
+                <option value="default">default</option>
+            </select>
+        </label><br>
+        <label for="item">Item: 
+            <input type="text" name="item" id="item">
+        </label>
+        <select name="items-from-inventory" id="items-from-inventory"> 
+            <option value="all-items">All Items</option>
+            <option value="test-item">Test Items</option>
+        </select>
+        <label for="customer-selector">Select a Customer:
+            <select name="customer-selector" id="customer-selector">
+                <option value="KK">KK</option>
+                <option value="kojo">Kojo</option>
+                <option value="kris">kris</option>
+            </select>
+        </label>
+        <input type="button" value="Search">
+    </div>
+    <div class="mid-third">
+        <table>
+            <th>Order #</th>
+            <th>Ref</th>
+            <th>Customer</th>
+            <th>Branch</th>
+            <th>Cust Order Ref</th>
+            <th>Order Date</th>
+            <th>Required By</th>
+            <th>Delivery To</th>
+            <th>Order Total</th>
+            <th>Currency</th>
+            <th>New Payments</th>
+            <tbody>
+                <tr>
+                    <td colspan="11">
+                        No Records
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="bottom-third">
+        <a href="home.html">Back</a>
+    </div>
+</body>
+</html>

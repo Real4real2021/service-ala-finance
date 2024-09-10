@@ -1,0 +1,19 @@
+.aside,
+.password-editing{
+    width: 250px;
+    background-color: green;
+}
+
+.aside,
+.my-profile,
+.password-editing,
+.leave-details-input,
+.display-leave-details{
+    display: inline-block;
+}
+
+.top-bar{
+    height: 20px;
+    background-color: red;
+}
+

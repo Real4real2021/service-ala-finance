@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Items</title>
+</head>
+<body>
+    <div>
+        <label for="select-an-item">Select an Item:
+            <input type="text" class="item-code-input">
+            <select name="inventory" id="inventory">
+                <option value="item-1">Item 1</option>
+                <option value="item-2">Item 2</option>
+                <option value="item-3">Item 3</option>
+                <option value="item-4">Item 4</option>
+            </select>
+        </label>
+    </div>
+    <div class="tab-toggle-buttons">
+        <input type="button" class="general-settings" value="General Settings">
+        <input type="button" class="sales-pricing" value="Sales Pricing">
+        <input type="button" class="purchasing-pricing" value="Purchasing Pricing">
+        <input type="button" class="standard-costs" value="Standard Costs">
+        <input type="button" class="reorder-levels" value="Reorder Levels">
+        <input type="button" class="transactions" value="Transactions">
+        <input type="button" class="status" value="Status">
+        <input type="button" class="attachments" value="Attachments">
+    </div>
+    <div class="rendered-table">
+        
+    </div>
+    <div>
+        <a href="items-and-inventory.html">Back</a>
+    </div>
+
+    <select name="gl-accounts" id="gl-accounts">
+        
+    </select>
+</body>
+<script src="scripts/items.js"></script>
+</html>
