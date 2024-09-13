@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Location Transfer</title>
+</head>
+<body>
+    <h1>Inventory Location Transfer</h1>
+    <div id="first-div">
+        <div id="from-location">
+            <label for="from-location">From Location:
+                <select id="location-selector"></select>
+            </label><br>
+            <label for="to-location">To Location:
+                <select name="" id="location-selector"></select>
+            </label>
+        </div>
+        <div id="date">
+            <label for="date">Date:
+                <input type="date" name="" id="date-input">
+            </label><br>
+            <label for="reference">Reference:
+                <input type="text" name="" id="reference-input">
+            </label>
+        </div>
+    </div>
+    <div id="items-table">
+        <h2>Items</h2>
+        <table>
+            <th>Items Code</th>
+            <th>Items Description</th>
+            <th>Quantity</th>
+            <th>Unit</th>
+            <tbody>
+                <tr>
+                    <td><input type="text" name="" id="item-code-input"></td>
+                    <td><select name="" id="inventory-item-selector"></select></td>
+                    <td><input type="text" name="" id="quantity-input"></td>
+                    <td>each</td>
+                    <td><input type="button" value="Add Item" id="add-item-button"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type="button" value="Process Transfer" id="process-transfer-button">
+    <a href="home.html">Back</a>
+</body>
+</html>

@@ -113,7 +113,7 @@ placeOrderButton.addEventListener('click', () => {
 
 function renderInputs(){
     let html = `
-    <h1>New Sales Quotation Entry</h1>
+    <h1>New Sales Order Entry</h1>
         <div class="customer-info">
             <label for="customer-selector">
                 Customer:

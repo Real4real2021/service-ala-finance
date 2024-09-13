@@ -73,7 +73,10 @@ addPaymentButton.addEventListener("click", () => {
     }).then((Data)=>{
         console.log(Data)
     });
-});
+   localStorage.setItem("referanceNumber", referanceInput.value);
+  });
+  export const referanceNumber = localStorage.getItem("referanceNumber");
+  console.log(referanceNumber);
 
 let innerOptions = "";
 async function customerSelectorOptions() {

@@ -70,6 +70,23 @@ async function customerSelectorOptions() {
 }
 customerSelectorOptions();
 
+secondInnerOption="";
+async function productSelectorOptions() {
+    const response = await fetch("function/read-item.php");
+    const items = await response.json();
+  
+    items.forEach((item) => {
+      let options = `
+          <option value="${item.name}">${item.name}</option> 
+          `;
+  
+          secondInnerOption += options;
+    });
+    const descriptionElement = document.getElementById("description");
+    descriptionElement.innerHTML = secondInnerOption;
+  }
+  productSelectorOptions();
+
 const reference = document.getElementById("reference");
 
 renderItemsTable();
@@ -125,6 +142,7 @@ placeQuotationButton.addEventListener("click", () => {
     itemCode: itemCodeInupt.value,
     description: descriptionSelector.value,
     quantity: quantityInput.value,
+    unit: 'each',
     priceAfterTax: priceAfterTaxInput.value,
     discount: discountInput.value,
   }).then((Data) => {

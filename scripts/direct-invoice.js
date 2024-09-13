@@ -17,7 +17,6 @@ async function customerSelectorOptions() {
 
     innerOptions += options;
   });
-  console.log(innerOptions);
   const customerSelectorElement = document.getElementById("customer-selector");
   customerSelectorElement.innerHTML = innerOptions;
 }
@@ -35,7 +34,6 @@ async function branchSelectorOptions() {
 
     branchinnerOption += options;
   });
-  console.log(branchinnerOption);
   const branchSelectorElement = document.getElementById("branch-selector");
   branchSelectorElement.innerHTML = branchinnerOption;
 }
@@ -45,6 +43,7 @@ branchSelectorOptions();
 renderSalesOrderTable();
 
 const customerSelector = document.getElementById("customer-selector");
+const table = document.querySelector("table");
 const branchSelector = document.getElementById("branch-selector");
 const reference = document.getElementById("reference");
 const currentCreditElement = document.getElementById("current-credit-element");
@@ -105,10 +104,10 @@ async function post(url, data, options = {}) {
   return responseText.json();
 }
 
-const salesOrder = [];
+const salesInvoiceItems = [];
 
 addItemButton.addEventListener("click", () => {
-  salesOrder.push({
+  salesInvoiceItems.push({
     reference: reference.value,
     itemCode: itemCodeInput.value,
     description: descriptionSelector.value,
@@ -116,7 +115,24 @@ addItemButton.addEventListener("click", () => {
     priceAfterTax: priceAfterTax.value,
     discount: discountInput.value,
   });
-  console.log(salesOrder);
+  console.log(salesInvoiceItems);
+
+  salesInvoiceItems.forEach((item) => {
+    HTML = `
+        <tr class="align-right">
+            <td>${item.itemCode}</td>
+            <td>${item.description}</td>
+            <td>${item.quantity}</td>
+            <td></td>
+            <td>${item.priceAfterTax}</td>
+            <td>${item.discount}</td>
+        </tr>
+        `;
+  });
+
+  const newTr = document.createElement("tr");
+  newTr.innerHTML = HTML;
+  table.append(newTr);
 });
 
 placeButton.addEventListener("click", () => {

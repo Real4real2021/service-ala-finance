@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier Invoice</title>
+</head>
+<body>
+    <h1>Enter Supplier Invoice</h1>
+    <div id="first-fifth">
+        <div id="supplier">
+            <label for="supplier">Supplier:
+                <select name="" id="supplier-selector"></select>
+            </label><br>
+            <label for="date">Date:
+                <input type="date" name="" id="date-input">
+            </label><br>
+            <label for="reference">Reference:
+                <input type="text" name="" id="reference-input">
+            </label><br>
+            <label for="supplier-ref">Supplier Ref:
+                <input type="text" name="" id="supplier-ref-input">
+            </label>
+        </div>
+        <div id="due-date">
+            <label for="due-date">Due Date:
+                <input type="date" name="" id="due-date">
+            </label><br>
+            <label for="terms">Terms:
+                Cash Only
+            </label><br>
+            <label for="Dimensions">Dimensions:
+                <select name="" id="dimension-selector"></select>
+            </label>
+        </div>
+        <div id="supplier-currency">
+            <label for="supplier-currency">Supplier's supplier-currency:
+                RAND
+            </label><br>
+            <label for="exchange-rate">Exchange Rate:
+                <input type="text" name="" id="exchange-rate-input">
+            </label><br>
+            <label for="tax-group">Tax Group:
+                Tax
+            </label><br>
+            <label for="current-credit">Current Credit:
+                0.00
+            </label>
+        </div>
+    </div>
+    <div id="second-fifth">
+        <h2>Items Received Yet to be Invoiced</h2>
+        <table>
+            <th>Delivery</th>
+            <th>P.O.</th>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Recived On</th>
+            <th>Quantity Received</th>
+            <th>Quantity Invoiced</th>
+            <th>Qty Yet to Invoiced</th>
+            <th>Price Before Tax</th>
+            <th>Total</th>
+            <tbody>
+                <tr></tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="third-fifth">
+        <h2>GL Items for this Invoice</h2>
+        <table>
+            <th>Account</th>
+            <th>name</th>
+            <th>Dimensions</th>
+            <th>Amount</th>
+            <th>Memo</th>
+            <tbody>
+                <tr>
+                    <td><input type="text" name="" id="account-input"></td>
+                    <td><select name="" id="name-selector"></select></td>
+                    <td><select name="" id="dimension-selector"></select></td>
+                    <td><select name="" id="amount-selector"></select></td>
+                    <td><input type="text" name="" id="memo-input"></td>
+                    <td><input type="button" value="Add" id="add-button"></td>
+                    <td><input type="button" value="Reset" id="reset-button"></td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="fourth-fifth">
+        <table>
+            <tr>
+                <td>sub-total</td>
+                <td>0.00</td>
+            </tr>
+            <tr>
+                <td>Invoice Total</td>
+                <td>0.00</td>
+                <td><input type="button" value="Update" id="update-button"></td>
+            </tr>
+        </table>
+    </div>
+    <div id="last-fifth">
+        <label for="memo">Memo:
+            <input type="text" name="" id="memo">
+        </label>
+    </div>
+</body>
+</html>
