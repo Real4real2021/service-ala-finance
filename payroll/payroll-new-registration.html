@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payroll Management - Employee Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 0;
+        }
+        h1 span {
+            font-weight: normal;
+            color: #666;
+        }
+        .subtitle {
+            color: #666;
+            margin-top: 0;
+        }
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .mandatory {
+            color: #ff0000;
+            font-size: 0.8em;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: inline-block;
+            width: 150px;
+            text-align: right;
+            margin-right: 10px;
+        }
+        input[type="text"], input[type="date"], select, textarea {
+            width: calc(100% - 165px);
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        textarea {
+            height: 60px;
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,100 L50,0 L100,100 Z" fill="#8e44ad"/>
+        </svg>
+    </div>
+    <div class="container">
+        <h1>Payroll <span>Management</span></h1>
+        <p class="subtitle">Employee Registration Form</p>
+        <form>
+            <div class="form-header">
+                <span>Fill the below form</span>
+                <span class="mandatory">All fields are mandatory</span>
+            </div>
+            <div class="form-group">
+                <label for="first-name">Full Name:</label>
+                <input type="text" id="first-name" placeholder="First Name" required>
+                <input type="text" id="last-name" placeholder="Last Name" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">DOB:</label>
+                <input type="date" id="dob" required>
+            </div>
+            <div class="form-group">
+                <label>Gender:</label>
+                <input type="radio" id="male" name="gender" required>
+                <label for="male" style="width: auto;">Male</label>
+                <input type="radio" id="female" name="gender" required>
+                <label for="female" style="width: auto;">Female</label>
+            </div>
+            <div class="form-group">
+                <label for="marital-status">Marital status:</label>
+                <select id="marital-status" required>
+                    <option value="">Please make a choice</option>
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                    <option value="divorced">Divorced</option>
+                    <option value="widowed">Widowed</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nationality">Nationality:</label>
+                <input type="text" id="nationality" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea id="address" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" id="city" required>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

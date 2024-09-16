@@ -50,6 +50,8 @@ async function post(url, data, options = {}) {
   return responseText.json();
 }
 
+checkTables();
+
 renderInputFeilds();
 
 let innerOptions = "";
@@ -68,28 +70,55 @@ async function customerSelectorOptions() {
   const customerSelectorElement = document.getElementById("customer-selector");
   customerSelectorElement.innerHTML = innerOptions;
 }
+
 customerSelectorOptions();
 
-secondInnerOption="";
+let secondInnerOption = "";
+
 async function productSelectorOptions() {
-    const response = await fetch("function/read-item.php");
-    const items = await response.json();
-  
-    items.forEach((item) => {
-      let options = `
+  const response = await fetch("function/read-item.php");
+  const items = await response.json();
+
+  items.forEach((item) => {
+    let options = `
           <option value="${item.name}">${item.name}</option> 
           `;
-  
-          secondInnerOption += options;
-    });
-    const descriptionElement = document.getElementById("description");
-    descriptionElement.innerHTML = secondInnerOption;
-  }
-  productSelectorOptions();
+
+    secondInnerOption += options;
+  });
+  const descriptionElement = document.getElementById("description");
+  descriptionElement.innerHTML = secondInnerOption;
+}
+
+let thirdInnerOption = "";
+
+async function branchSelectorOptions() {
+  const response = await fetch("function/read-and-manage-branches.php");
+  const branches = await response.json();
+
+  branches.forEach((branch) => {
+    let options = `
+          <option value="${branch.branchName}">${branch.branchName}</option> 
+          `;
+    thirdInnerOption += options;
+  });
+  const branchSelector = document.getElementById("branch-selector");
+  branchSelector.innerHTML = thirdInnerOption;
+}
+
+async function checkTables() {
+  const response = await fetch("exec/create.php");
+  const result = await response.json();
+  console.log(result); // Log the result to see if tables were created successfully
+  return result.success; // Assuming the PHP script returns a success property
+}
+
+branchSelectorOptions();
 
 const reference = document.getElementById("reference");
 
 renderItemsTable();
+
 const addItemButton = document.querySelector(".add-item-button");
 const itemCodeInupt = document.getElementById("item-code");
 const descriptionSelector = document.getElementById("description");
@@ -97,7 +126,15 @@ const quantityInput = document.getElementById("quantity");
 const priceAfterTaxInput = document.getElementById("price-taxed");
 const discountInput = document.getElementById("discount");
 const totalCell = document.getElementById("total-cell");
+const customerSelector = document.getElementById("customer-selector");
+const branchSelector = document.getElementById("branch-selector");
+const referenceInput = document.getElementById("reference");
+const currentCreditElement = document.getElementById("current-credit");
+const paymentSelector = document.getElementById("payment");
+const priceListSelector = document.getElementById("price-list");
+const dateInput = document.getElementById("quotation-date");
 const table = document.querySelector(".table");
+const unitCell = document.getElementById("unit-cell");
 
 // placeQuotationButton.addEventListener('click', () => {
 //     console.log(reference.value);
@@ -108,44 +145,82 @@ const salesQuotationInvoice = [];
 let HTML = "";
 addItemButton.addEventListener("click", () => {
   salesQuotationInvoice.push({
-    referance: reference.value,
-    itemCode: itemCodeInupt.value,
-    description: descriptionSelector.value,
-    quantity: quantityInput.value,
-    priceAfterTax: priceAfterTaxInput.value,
-    discount: discountInput.value,
-  });
-
-  // console.log(salesQuotationInvoice)
-
-  salesQuotationInvoice.forEach((item) => {
-    HTML = `
-        <tr class="align-right">
-            <td>${item.itemCode}</td>
-            <td>${item.description}</td>
-            <td>${item.quantity}</td>
-            <td></td>
-            <td>${item.priceAfterTax}</td>
-            <td>${item.discount}</td>
-        </tr>
-        `;
-  });
-
-  const newTr = document.createElement("tr");
-  newTr.innerHTML = HTML;
-  table.append(newTr);
-});
-
-placeQuotationButton.addEventListener("click", () => {
-  post("function/sales-quotation-entry.php", {
-    reference: reference.value,
+    referance: referenceInput.value,
     itemCode: itemCodeInupt.value,
     description: descriptionSelector.value,
     quantity: quantityInput.value,
     unit: 'each',
     priceAfterTax: priceAfterTaxInput.value,
     discount: discountInput.value,
-  }).then((Data) => {
+    customer: customerSelector.value,
+    branch: branchSelector.value,
+    payment: paymentSelector.value,
+    priceList: priceListSelector.value,
+    date: dateInput.value
+  });
+
+  // console.log(salesQuotationInvoice)
+
+  const newRowHTML = `
+      <tr class="align-right">
+          <td>${
+            salesQuotationInvoice[salesQuotationInvoice.length - 1].itemCode
+          }</td>
+          <td>${
+            salesQuotationInvoice[salesQuotationInvoice.length - 1].description
+          }</td>
+          <td>${
+            salesQuotationInvoice[salesQuotationInvoice.length - 1].quantity
+          }</td>
+          <td></td>
+          <td>${
+            salesQuotationInvoice[salesQuotationInvoice.length - 1]
+              .priceAfterTax
+          }</td>
+          <td>${
+            salesQuotationInvoice[salesQuotationInvoice.length - 1].discount
+          }</td>
+      </tr>
+  `;
+
+  // Create a new table row element
+  const newTr = document.createElement("tr");
+  newTr.innerHTML = newRowHTML;
+
+  // Get the table body and insert the new row after the first row
+  const tableBody = table.querySelector("tbody");
+  const firstRow = tableBody.querySelector("tr"); // Get the first row
+  tableBody.insertBefore(newTr, firstRow.nextSibling);
+});
+
+placeQuotationButton.addEventListener("click", () => {
+  const groupedData = salesQuotationInvoice.reduce((acc, item) => {
+    if (!acc[item.referance]) {
+      acc[item.referance] = []; // Create a new array for this referance
+    }
+    acc[item.referance].push({
+      itemCode: item.itemCode,
+      description: item.description,
+      quantity: item.quantity,
+      unit:item.unit,
+      priceAfterTax: item.priceAfterTax,
+      discount: item.discount,
+      customer: item.customer,
+      branch: branchSelector.value,
+      payment: paymentSelector.value,
+      priceList: priceListSelector.value,
+      date: dateInput.value
+    });
+    return acc;
+  }, {});
+
+  // Prepare the data to be sent to the PHP script
+  const dataToSend = {
+    referance: Object.keys(groupedData), // Get the referances
+    items: groupedData, // Grouped items
+  };
+
+  post("function/sales-quotation-entry.php", dataToSend).then((Data) => {
     console.log(Data);
   });
 });
@@ -157,29 +232,11 @@ function renderInputFeilds() {
             <label for="customer-selector">
                 Customer:
                 <select name="customer-selector" id="customer-selector">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                    
                 </select> </label><br />
             <label for="branch-selector">Branch:
                 <select name="branch-selector" id="branch-selector">
-                    <option selected value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                    
                 </select> </label><br />
             <label for="reference">
                 Reference:
@@ -250,7 +307,7 @@ function renderItemsTable() {
                     <td>
                         <input type="text" name="Quantity" id="quantity">
                     </td>
-                    <td>
+                    <td id="unit-cell">
                         each
                     </td>
                     <td>

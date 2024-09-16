@@ -1,5 +1,7 @@
 const inventorySelector = document.getElementById("inventory");
 
+checkTables();
+
 const buttonGeneralSettings = document.querySelector(".general-settings");
 const buttonSalesPricing = document.querySelector(".sales-pricing");
 const buttonPurchasingPricing = document.querySelector(".purchasing-pricing");
@@ -471,3 +473,10 @@ function renderAttachments() {
 buttonAttachments.addEventListener("click", () => {
   renderAttachments();
 });
+
+async function checkTables() {
+  const response = await fetch("exec/create.php");
+  const result = await response.json();
+  console.log(result); // Log the result to see if tables were created successfully
+  return result.success; // Assuming the PHP script returns a success property
+}

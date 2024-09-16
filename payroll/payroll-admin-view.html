@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance - Payroll Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+        }
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .content {
+            padding: 20px;
+            background-color: #ecf0f1;
+            flex-grow: 1;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .nav-item {
+            margin-bottom: 10px;
+        }
+        .nav-item a {
+            color: white;
+            text-decoration: none;
+        }
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .attendance-table th, .attendance-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .attendance-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .attendance-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        .table-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .pagination {
+            display: flex;
+            align-items: center;
+        }
+        .pagination button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .pagination .current-page {
+            background-color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="user-info">
+            <img src="/placeholder.svg?height=50&width=50" alt="Admin" class="user-avatar">
+            <div>
+                <div>Admin</div>
+                <div style="color: #2ecc71;">Online</div>
+            </div>
+        </div>
+        <nav>
+            <div class="nav-item"><a href="#">Attendance</a></div>
+            <div class="nav-item"><a href="#">Employees Section</a></div>
+            <div class="nav-item"><a href="#">Salary Slips</a></div>
+            <div class="nav-item"><a href="#">Leave Management</a></div>
+            <div class="nav-item"><a href="#">Pay Heads</a></div>
+            <div class="nav-item"><a href="#">List Holidays</a></div>
+        </nav>
+    </div>
+    <div class="main-content">
+        <header class="header">
+            <div>Payroll M S</div>
+            <div>
+                <span>Admin</span>
+                <img src="/placeholder.svg?height=30&width=30" alt="Admin Avatar" style="width: 30px; height: 30px; border-radius: 50%; margin-left: 10px;">
+            </div>
+        </header>
+        <div class="content">
+            <h1>Attendance</h1>
+            <div class="table-controls">
+                <div>
+                    <label for="entries">Show</label>
+                    <select id="entries">
+                        <option>10</option>
+                        <option>25</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                    <label for="entries">entries</label>
+                </div>
+                <div>
+                    <label for="search">Search:</label>
+                    <input type="text" id="search">
+                </div>
+            </div>
+            <table class="attendance-table">
+                <thead>
+                    <tr>
+                        <th>DATE</th>
+                        <th>EMP CODE</th>
+                        <th>NAME</th>
+                        <th>PUNCH IN</th>
+                        <th>PUNCH-IN MESSAGE</th>
+                        <th>PUNCH OUT</th>
+                        <th>PUNCH-OUT MESSAGE</th>
+                        <th>WORK HOURS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>22-08-2021</td>
+                        <td>WY05</td>
+                        <td>Agnes Miller</td>
+                        <td>06:14:37 PM</td>
+                        <td>nonee</td>
+                        <td>06:14:43 PM</td>
+                        <td>out</td>
+                        <td>0 Hrs 0 Min</td>
+                    </tr>
+                    <tr>
+                        <td>10-07-2021</td>
+                        <td>WY06</td>
+                        <td>Demo Employee</td>
+                        <td>11:48:07 AM</td>
+                        <td></td>
+                        <td>11:48:09 AM</td>
+                        <td></td>
+                        <td>0 Hrs 0 Min</td>
+                    </tr>
+                    <tr>
+                        <td>14-04-2021</td>
+                        <td>WY02</td>
+                        <td>Leo Allen</td>
+                        <td>10:19:14 PM</td>
+                        <td>out-144</td>
+                        <td>03:05:42 PM</td>
+                        <td>D114</td>
+                        <td>7 Hrs 13 Min</td>
+                    </tr>
+                    <tr>
+                        <td>14-04-2021</td>
+                        <td>WY03</td>
+                        <td>Christen Moore</td>
+                        <td>10:30:30 AM</td>
+                        <td>IN</td>
+                        <td>05:30:52 PM</td>
+                        <td>OUT</td>
+                        <td>7 Hrs 0 Min</td>
+                    </tr>
+                    <tr>
+                        <td>14-04-2021</td>
+                        <td>WY04</td>
+                        <td>Stephen Denn</td>
+                        <td>10:00:59 AM</td>
+                        <td>IS1</td>
+                        <td>02:31:27 PM</td>
+                        <td>IS1</td>
+                        <td>4 Hrs 30 Min</td>
+                    </tr>
+                    <tr>
+                        <td>14-04-2021</td>
+                        <td>WY05</td>
+                        <td>Agnes Miller</td>
+                        <td>07:11:29 PM</td>
+                        <td>In</td>
+                        <td>07:13:02 PM</td>
+                        <td>Outt</td>
+                        <td>0 Hrs 1 Min</td>
+                    </tr>
+                    <tr>
+                        <td>13-04-2021</td>
+                        <td>WY01</td>
+                        <td>Will Williams</td>
+                        <td>10:41:27 AM</td>
+                        <td>21</td>
+                        <td>05:37:36 PM</td>
+                        <td>220</td>
+                        <td>6 Hrs 56 Min</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-controls">
+                <div>Showing 1 to 7 of 7 entries</div>
+                <div class="pagination">
+                    <button>Previous</button>
+                    <button class="current-page">1</button>
+                    <button>Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

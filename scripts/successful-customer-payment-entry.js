@@ -37,10 +37,6 @@ async function post(url, data, options = {}) {
   return responseText.json();
 }
 
-
-
-// ... existing code ...
-
 printReceiptLink.addEventListener("click", () => {
     renderReceipt();
 });

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Payroll Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+        }
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .content {
+            padding: 20px;
+            background-color: #ecf0f1;
+            flex-grow: 1;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .nav-item {
+            margin-bottom: 10px;
+        }
+        .nav-item a {
+            color: white;
+            text-decoration: none;
+        }
+        .punch-in {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .punch-in input {
+            flex-grow: 1;
+            margin-right: 10px;
+            padding: 5px;
+        }
+        .punch-in button {
+            background-color: #f39c12;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .profile-form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .form-row {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            flex: 1;
+            margin-right: 15px;
+        }
+        .form-group:last-child {
+            margin-right: 0;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #bdc3c7;
+            border-radius: 3px;
+        }
+        .change-password {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        .submit-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="user-info">
+            <img src="/placeholder.svg?height=50&width=50" alt="Agnes Miller" class="user-avatar">
+            <div>
+                <div>Agnes Miller</div>
+                <div style="color: #2ecc71;">Online</div>
+            </div>
+        </div>
+        <div class="punch-in">
+            <input type="text" placeholder="Comment (if any)">
+            <button>Punch In</button>
+        </div>
+        <nav>
+            <div class="nav-item"><a href="#">Salary Slips</a></div>
+            <div class="nav-item"><a href="#">Leaves</a></div>
+            <div class="nav-item"><a href="#">Holidays</a></div>
+        </nav>
+    </div>
+    <div class="main-content">
+        <header class="header">
+            <div>Payroll M S</div>
+            <div>
+                <span>Agnes Miller</span>
+                <img src="/placeholder.svg?height=30&width=30" alt="User Avatar" style="width: 30px; height: 30px; border-radius: 50%; margin-left: 10px;">
+            </div>
+        </header>
+        <div class="content">
+            <h1>My Profile</h1>
+            <div class="profile-form">
+                <h2>Edit Profile Details</h2>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" value="Agnes">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" value="Miller">
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth (MM/DD/YYYY)</label>
+                            <input type="text" id="dob" value="07/29/1993">
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender">
+                                <option value="female" selected>Female</option>
+                                <option value="male">Male</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" value="4211 Rubaiyt Road">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" value="Grand Rapids">
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" id="state" value="Michigan">
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" id="country" value="US">
+                        </div>
+                        <div class="form-group">
+                            <label for="maritalStatus">Marital Status</label>
+                            <input type="text" id="maritalStatus" value="Single">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nationality">Nationality</label>
+                            <input type="text" id="nationality" value="American">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" value="agnesm88d@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile">Mobile</label>
+                            <input type="tel" id="mobile" value="3247548880">
+                        </div>
+                        <div class="form-group">
+                            <label for="telephone">Telephone</label>
+                            <input type="tel" id="telephone" value="2457778540">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="identityDocument">Identity Document</label>
+                            <select id="identityDocument">
+                                <option value="passport" selected>Passport</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="identityNo">Identity No</label>
+                            <input type="text" id="identityNo" value="245785000">
+                        </div>
+                        <div class="form-group">
+                            <label for="employmentType">Employment Type</label>
+                            <select id="employmentType">
+                                <option value="permanent" selected>Permanent position</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="joiningDate">Joining Date (MM/DD/YYYY)</label>
+                            <input type="text" id="joiningDate" value="10/15/2020">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bloodGroup">Blood Group</label>
+                            <input type="text" id="bloodGroup" value="B+">
+                        </div>
+                        <div class="form-group">
+                            <label for="designation">Designation</label>
+                            <input type="text" id="designation" value="Chief Technology Officer">
+                        </div>
+                        <div class="form-group">
+                            <label for="department">Department</label>
+                            <input type="text" id="department" value="IT">
+                        </div>
+                        <div class="form-group">
+                            <label for="panNo">PAN No.</label>
+                            <input type="text" id="panNo" value="425569690">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="change-password">
+                <h2>Change Password</h2>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="existingPassword">Existing Password:</label>
+                            <input type="password" id="existingPassword">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="newPassword">New Password:</label>
+                            <input type="password" id="newPassword">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password:</label>
+                            <input type="password" id="confirmPassword">
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

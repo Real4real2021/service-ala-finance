@@ -3,6 +3,7 @@ const inputDiv =  document.querySelector('.customer-info-inputs');
 const placeDeliveryButton = document.getElementById('place-delivery-button');
 const cancelDelvieryButton = document.getElementById('cancel-delivery-button');
 
+checkTables();
 renderInputs();
 renderSalesOrderTable();
 
@@ -66,6 +67,13 @@ function loading() {
   }
 
 const salesOrder = [];
+
+async function checkTables() {
+    const response = await fetch("exec/create.php");
+    const result = await response.json();
+    console.log(result); // Log the result to see if tables were created successfully
+    return result.success; // Assuming the PHP script returns a success property
+}
 
 addItemButton.addEventListener('click', () => {
     salesOrder.push({

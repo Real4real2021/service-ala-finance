@@ -1,6 +1,7 @@
 const inputDiv = document.querySelector(".input-div");
 const tableDiv = document.querySelector(".mid-third");
 
+checkTables();
 renderInputs();
 renderTable();
 customerSelectorOptions();
@@ -16,7 +17,27 @@ const dimensionsSelector = document.getElementById("dimensions-selector");
 const amountOfDiscount = document.getElementById("amount-of-discount");
 const amount = document.getElementById("amount");
 const memo = document.getElementById("memo");
+const itemSelector = document.getElementById("item-selector");
 const addPaymentButton = document.getElementById("add-payment-button");
+
+let itemOptions = "";
+
+async function itemSelectorOptions() {
+  const response = await fetch("function/read-item.php");
+  const items = await response.json();
+
+  items.forEach((item) => {
+    let options = `
+        <option value="${item.name}" id="${item.itemCode}">${item.name}</option>
+        `;
+    itemOptions += options;
+  });
+
+  const itemSelector = document.getElementById("item-selector");
+  itemSelector.innerHTML = itemOptions;
+}
+
+itemSelectorOptions();
 
 function loading() {
   console.log("loading");
@@ -59,24 +80,23 @@ async function post(url, data, options = {}) {
 }
 
 addPaymentButton.addEventListener("click", () => {
-    post('function/customer-payment.php', {
-        customer: customerSelector.value,
-        branch: branchSelector.value,
-        bankAccount: bankAccountSelector.value,
-        date: dateInput.value,
-        referance: referanceInput.value,
-        bankCharge: bankChargeInput.value,
-        dimensions: dimensionsSelector.value,
-        amountOfDiscount: amountOfDiscount.value,
-        amount: amount.value,
-        memo: memo.value
-    }).then((Data)=>{
-        console.log(Data)
-    });
-   localStorage.setItem("referanceNumber", referanceInput.value);
+  post("function/customer-payment.php", {
+    customer: customerSelector.value,
+    branch: branchSelector.value,
+    bankAccount: bankAccountSelector.value,
+    date: dateInput.value,
+    referance: referanceInput.value,
+    bankCharge: bankChargeInput.value,
+    dimensions: dimensionsSelector.value,
+    amountOfDiscount: amountOfDiscount.value,
+    amount: amount.value,
+    memo: memo.value,
+  }).then((Data) => {
+    console.log(Data);
   });
-  export const referanceNumber = localStorage.getItem("referanceNumber");
-  console.log(referanceNumber);
+  localStorage.setItem("referanceNumber", referanceInput.value);
+});
+export const referanceNumber = localStorage.getItem("referanceNumber");
 
 let innerOptions = "";
 async function customerSelectorOptions() {
@@ -92,6 +112,13 @@ async function customerSelectorOptions() {
   });
   const customerSelectorElement = document.getElementById("customer-selector");
   customerSelectorElement.innerHTML = innerOptions;
+}
+
+async function checkTables() {
+  const response = await fetch("exec/create.php");
+  const result = await response.json();
+  console.log(result); // Log the result to see if tables were created successfully
+  return result.success; // Assuming the PHP script returns a success property
 }
 
 function renderInputs() {
@@ -112,6 +139,11 @@ function renderInputs() {
                 <select name="bank-account" id="bank-account-selector">
                     <option value="current-account">Current Account</option>
                     <option value="petty-cash-account">Petty Cash Account</option>
+                </select>
+            </label><br>
+            <label for="item-selector">Select Item form Inventory:
+                <select name="item-selector" id="item-selector">
+                    
                 </select>
             </label>
         </div>
