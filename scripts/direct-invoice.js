@@ -30,7 +30,7 @@ async function branchSelectorOptions() {
 
   branches.forEach((branch) => {
     let options = `
-          <option value="${branch.name}">${branch.name}</option> 
+          <option value="${branch.branchName}">${branch.branchName}</option> 
           `;
 
     branchinnerOption += options;
@@ -71,6 +71,7 @@ const discountInput = document.getElementById("Discount");
 const totalCell = document.getElementById("total-cell");
 const addItemButton = document.querySelector(".add-item-button");
 const ShippingChargeInput = document.getElementById("chargeAmount");
+const date = document.getElementById("quotation-date");
 
 function loading() {
   console.log("loading");
@@ -112,47 +113,86 @@ async function post(url, data, options = {}) {
   return responseText.json();
 }
 
-const salesInvoiceItems = [];
+const directInvoiceItems = [];
 
 addItemButton.addEventListener("click", () => {
-  salesInvoiceItems.push({
-    reference: reference.value,
-    itemCode: itemCodeInput.value,
-    description: descriptionSelector.value,
-    quantity: quantityInput.value,
-    priceAfterTax: priceAfterTax.value,
-    discount: discountInput.value,
-  });
-  console.log(salesInvoiceItems);
-
-  salesInvoiceItems.forEach((item) => {
-    HTML = `
-        <tr class="align-right">
-            <td>${item.itemCode}</td>
-            <td>${item.description}</td>
-            <td>${item.quantity}</td>
-            <td></td>
-            <td>${item.priceAfterTax}</td>
-            <td>${item.discount}</td>
-        </tr>
-        `;
-  });
-
-  const newTr = document.createElement("tr");
-  newTr.innerHTML = HTML;
-  table.append(newTr);
-});
-
-placeButton.addEventListener("click", () => {
-  post("function/direct-invoice.php", {
+  directInvoiceItems.push({
     referance: reference.value,
     itemCode: itemCodeInput.value,
     description: descriptionSelector.value,
     quantity: quantityInput.value,
-    unit: "each",
+    unit: 'each',
     priceAfterTax: priceAfterTax.value,
     discount: discountInput.value,
-  }).then((Data) => {
+    customer: customerSelector.value,
+    branch: branchSelector.value,
+    payment: paymentSelector.value,
+    priceList: priceListSelector.value,
+    date: date.value
+  });
+
+  // console.log(directInvoiceItems)
+
+  const newRowHTML = `
+      <tr class="align-right">
+          <td>${
+            directInvoiceItems[directInvoiceItems.length - 1].itemCode
+          }</td>
+          <td>${
+            directInvoiceItems[directInvoiceItems.length - 1].description
+          }</td>
+          <td>${
+            directInvoiceItems[directInvoiceItems.length - 1].quantity
+          }</td>
+          <td></td>
+          <td>${
+            directInvoiceItems[directInvoiceItems.length - 1]
+              .priceAfterTax
+          }</td>
+          <td>${
+            directInvoiceItems[directInvoiceItems.length - 1].discount
+          }</td>
+      </tr>
+  `;
+
+  // Create a new table row element
+  const newTr = document.createElement("tr");
+  newTr.innerHTML = newRowHTML;
+
+  // Get the table body and insert the new row after the first row
+  const tableBody = table.querySelector("tbody");
+  const firstRow = tableBody.querySelector("tr"); // Get the first row
+  tableBody.insertBefore(newTr, firstRow.nextSibling);
+});
+
+placeButton.addEventListener("click", () => {
+  const groupedData = directInvoiceItems.reduce((acc, item) => {
+    if (!acc[item.referance]) {
+      acc[item.referance] = []; // Create a new array for this referance
+    }
+    acc[item.referance].push({
+      itemCode: item.itemCode,
+      description: item.description,
+      quantity: item.quantity,
+      unit:item.unit,
+      priceAfterTax: item.priceAfterTax,
+      discount: item.discount,
+      customer: item.customer,
+      branch: branchSelector.value,
+      payment: paymentSelector.value,
+      priceList: priceListSelector.value,
+      date: date.value
+    });
+    return acc;
+  }, {});
+
+  // Prepare the data to be sent to the PHP script
+  const dataToSend = {
+    referance: Object.keys(groupedData), // Get the referances
+    items: groupedData, // Grouped items
+  };
+
+  post("function/direct-invoice.php", dataToSend).then((Data) => {
     console.log(Data);
   });
 });

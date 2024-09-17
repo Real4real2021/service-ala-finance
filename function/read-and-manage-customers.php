@@ -24,7 +24,6 @@ while ($row = mysqli_fetch_assoc($result)){
     $generalNotes = $row["generalNotes"];
     $defaultInventoryLocation = $row["defaultInventoryLocation"];
     $defaultShippingCompany = $row["defaultShippingCompany"] ;
-    $SalesArea = $row["SalesArea"];
     $taxGroup = $row["taxGroup"];
     $associativeArray[]=[
         'primaryId' => $primaryId,
@@ -46,7 +45,6 @@ while ($row = mysqli_fetch_assoc($result)){
         'generalNotes' => $generalNotes,
         'defaultInventoryLocation' => $defaultInventoryLocation,
         'defaultShippingCompany' => $defaultShippingCompany,
-        'SalesArea' => $SalesArea,
         'taxGroup' => $taxGroup
     ];
 };

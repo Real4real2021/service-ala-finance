@@ -148,6 +148,46 @@ CREATE TABLE IF NOT EXISTS direct_invoice (
 
 mysqli_query($con, $createDirectInvoiceTable) or die(mysqli_error($con));
 
+$createSalesQuotationEntriesTable = "
+CREATE TABLE IF NOT EXISTS sales_quotation_entries (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    referance VARCHAR(25) NOT NULL,
+    itemCode VARCHAR(25) NOT NULL,
+    description TEXT,
+    quantity INT NOT NULL,
+    unit VARCHAR(25),
+    priceAfterTax DECIMAL(10, 2),
+    discount DECIMAL(5, 2),
+    customer VARCHAR(25),
+    branch VARCHAR(25),
+    payment VARCHAR(25),
+    priceList VARCHAR(25),
+    date DATE
+)";
+
+mysqli_query($con, $createSalesQuotationEntriesTable) or die(mysqli_error($con));
+
+$createPurchaseOrderEntriesTable = "
+CREATE TABLE IF NOT EXISTS purchase_order_entries (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    referance VARCHAR(25) NOT NULL,
+    supplierReference VARCHAR(25),
+    dimensions VARCHAR(25),
+    receiveInto VARCHAR(25),
+    deliverTo VARCHAR(25),
+    itemCode VARCHAR(25) NOT NULL,
+    description TEXT,
+    quantity INT NOT NULL,
+    unit VARCHAR(25),
+    requiredDeliveryDate DATE,
+    priceBeforeTax DECIMAL(10, 2),
+    supplier VARCHAR(25),
+    exchangeRate VARCHAR(25),
+    date DATE
+)";
+
+mysqli_query($con, $createPurchaseOrderEntriesTable) or die(mysqli_error($con));
+
 // Close the database connection
 mysqli_close($con);
 echo json_encode("Tables created successfully.");

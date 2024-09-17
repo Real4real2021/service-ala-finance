@@ -23,7 +23,7 @@ if (isset($_POST["items"]) && isset($_POST["referance"])) {
                 $date = mysqli_real_escape_string($con, $item['date']);
 
                 // Insert each item into the database
-                $query = "INSERT INTO service_de_financea.sales_quotation_entreis (reference, itemCode, description, quantity, unit, priceAfterTax, discount, customer, branch, payment, priceList, date) 
+                $query = "INSERT INTO service_de_financea.sales_quotation_entries (referance, itemCode, description, quantity, unit, priceAfterTax, discount, customer, branch, payment, priceList, date) 
                           VALUES ('$referance', '$itemCode', '$description', '$quantity', '$unit', '$priceAfterTax', '$discount', '$customer', '$branch', '$payment', '$priceList', '$date')";
 
                 mysqli_query($con, $query) or die(mysqli_error($con));

@@ -106,6 +106,8 @@ async function branchSelectorOptions() {
   branchSelector.innerHTML = thirdInnerOption;
 }
 
+branchSelectorOptions();
+
 async function checkTables() {
   const response = await fetch("exec/create.php");
   const result = await response.json();
@@ -113,7 +115,6 @@ async function checkTables() {
   return result.success; // Assuming the PHP script returns a success property
 }
 
-branchSelectorOptions();
 
 const reference = document.getElementById("reference");
 
@@ -223,6 +224,7 @@ placeQuotationButton.addEventListener("click", () => {
   post("function/sales-quotation-entry.php", dataToSend).then((Data) => {
     console.log(Data);
   });
+  alert("Data added to database");
 });
 
 function renderInputFeilds() {
