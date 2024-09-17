@@ -1,5 +1,5 @@
 const inputDiv = document.getElementById("top-third");
-const TableDiv = document.getElementById("mid-third");
+const tableDiv = document.getElementById("mid-third");
 
 function loading() {
     console.log("loading");
@@ -43,17 +43,17 @@ function loading() {
 
 checkTables();
 renderInputs();
-renderPurchaseOrderTable();
+renderTable();
 
 async function checkTables() {
-    const response = await fetch("exec/create.php");
-    const result = await response.json();
-    console.log(result); // Log the result to see if tables were created successfully
-    return result.success; // Assuming the PHP script returns a success property
-  }
+  const response = await fetch("exec/create.php");
+  const result = await response.json();
+  console.log(result); // Log the result to see if tables were created successfully
+  return result.success; // Assuming the PHP script returns a success property
+}
 
-function renderInputs(){
-    let html = `
+function renderInputs() {
+  let html = `
     <div id="supplier-details-1">
             <label for="supplier">Supplier:
                 <select name="supplier-selector" id="supplier-selector">
@@ -96,12 +96,12 @@ function renderInputs(){
                 <input type="text" id="deliver-to-input">
             </label>
         </div>
-    `
-    inputDiv.innerHTML = html;
+    `;
+  inputDiv.innerHTML = html;
 }
 
-function renderPurchaseOrderTable(){
-    let html = `
+function renderTable() {
+  let html = `
     <table class="table">
             <th>Item Code</th>
             <th>Item Description</th>
@@ -133,73 +133,65 @@ function renderPurchaseOrderTable(){
                 </tr>
             </tbody>
         </table>
-    `
-    TableDiv.innerHTML = html;
+    `;
+  tableDiv.innerHTML = html;
 }
 
-const addItemButton = document.getElementById("add-item-button");
-const placePurchaseOrderButton = document.getElementById("place-purchase-order-button");
 const table = document.querySelector("table");
-const supplierSelector = document.getElementById("supplier-selector");  
-const orderDate = document.getElementById("date-input");  
-const supplierCurrency = document.getElementById("supplier-currency-input"); 
-const exchangeRate = document.getElementById("exchange-rate-input"); 
-const reference = document.getElementById("reference-input"); 
-const supplier = document.getElementById("supplier-reference-input"); 
-const dimensionsSelector = document.getElementById("dimensions-selector"); 
-const receiveInto = document.getElementById("receive-into-selector"); 
-const deliverTo = document.getElementById("deliver-to-input"); 
-const itemCode = document.getElementById("item-code-input"); 
-const descriptionSelector = document.getElementById("item-description-selector"); 
-const quantityInput = document.getElementById("quantity-input"); 
-const unitCell = document.getElementById("unit-cell"); 
-const requiredDeliveryDate = document.getElementById("required-delivery-date-input"); 
+const addItemButton = document.getElementById("add-item-button");
+const supplierSelector = document.getElementById("supplier-selector");
+const orderDate = document.getElementById("date-input");
+const currency = document.getElementById("supplier-currency-input");
+const exchangeRate = document.getElementById("exchange-rate-input");
+const reference = document.getElementById("reference-input");
+const supplierReference = document.getElementById("supplier-reference-input");
+const dimensionsSelector = document.getElementById("dimensions-selector");
+const receiveIntoSelector = document.getElementById("receive-into-selector");
+const deliverTo = document.getElementById("deliver-to-input");
+const itemCode = document.getElementById("item-code-input");
+const descriptionSelector = document.getElementById(
+  "item-description-selector"
+);
+const quantityInput = document.getElementById("quantity-input");
+const unitCell = document.getElementById("unit-cell");
+const requiredDeliveryDate = document.getElementById(
+  "required-delivery-date-input"
+);
 const priceBeforeTax = document.getElementById("price-before-tax-input");
+const placeDirectGrnButton = document.getElementById("place-direct-grn-button");
 
-const purchaseOrderItems = [];
+const directGrnItems = [];
+addItemButton.addEventListener("click", () => {
+  directGrnItems.push({
+    supplier: supplierSelector.value,
+    orderDate: orderDate.value,
+    currency: currency.value,
+    exchangeRate: exchangeRate.value,
+    reference: reference.value,
+    supplierReference: supplierReference.value,
+    dimensions: dimensionsSelector.value,
+    receiveInto: receiveIntoSelector.value,
+    deliverTo: deliverTo.value,
+    itemCode: itemCode.value,
+    description: descriptionSelector.value,
+    quantity: quantityInput.value,
+    unit: unitCell.innerHTML,
+    requiredDeliveryDate: requiredDeliveryDate.value,
+    priceBeforeTax: priceBeforeTax.value,
+  });
 
-addItemButton.addEventListener('click', ()=>{
-    purchaseOrderItems.push({
-        supplier:    supplierSelector.value,
-        orderDate:   orderDate.value,
-        currency:    supplierCurrency.value,
-        exchangeRate:    exchangeRate.value,
-        reference:  reference.value,
-        supplierReference:  supplier.value,
-        dimensions:  dimensionsSelector.value,
-        receiveInto:    receiveInto.value,
-        deliverTo:  deliverTo.value,
-        itemCode:    itemCode.value,
-        description:    descriptionSelector.value,
-        quantity:    quantityInput.value,
-        unit:    unitCell.innerHTML,
-        requiredDeliveryDate:    requiredDeliveryDate.value,
-        priceBeforeTax:    priceBeforeTax.value
-    });
-
-    const newRowHTML = `
+  const newRowHTML = `
       <tr class="align-right">
-          <td>${
-            purchaseOrderItems[purchaseOrderItems.length - 1].itemCode
-          }</td>
-          <td>${
-            purchaseOrderItems[purchaseOrderItems.length - 1].description
-          }</td>
-          <td>${
-            purchaseOrderItems[purchaseOrderItems.length - 1].quantity
-          }</td>
+          <td>${directGrnItems[directGrnItems.length - 1].itemCode}</td>
+          <td>${directGrnItems[directGrnItems.length - 1].description}</td>
+          <td>${directGrnItems[directGrnItems.length - 1].quantity}</td>
           <td>
-            ${
-              purchaseOrderItems[purchaseOrderItems.length - 1].unit
-            }
+            ${directGrnItems[directGrnItems.length - 1].unit}
           </td>
           <td>${
-            purchaseOrderItems[purchaseOrderItems.length - 1]
-              .requiredDeliveryDate
+            directGrnItems[directGrnItems.length - 1].requiredDeliveryDate
           }</td>
-          <td>${
-            purchaseOrderItems[purchaseOrderItems.length - 1].priceBeforeTax
-          }</td>
+          <td>${directGrnItems[directGrnItems.length - 1].priceBeforeTax}</td>
       </tr>
   `;
 
@@ -213,39 +205,39 @@ addItemButton.addEventListener('click', ()=>{
   tableBody.insertBefore(newTr, firstRow.nextSibling);
 });
 
-placePurchaseOrderButton.addEventListener('click', () => {
-    const groupedData = purchaseOrderItems.reduce((acc, item) => {
-        if (!acc[item.reference]) {
-          acc[item.reference] = []; // Create a new array for this reference
-        }
-        acc[item.reference].push({
-            supplier: item.supplier,
-            orderDate: item.orderDate,
-            currency: item.currency,
-            exchangeRate: item.exchangeRate,
-            supplierReference: item.supplierReference,
-            dimensions: item.dimensions,
-            receiveInto: item.receiveInto,
-            deliverTo: item.deliverTo,
-            itemCode: item.itemCode,
-            description: item.description,
-            quantity: item.quantity,
-            unit: item.unit,
-            requiredDeliveryDate: item.requiredDeliveryDate,
-            priceBeforeTax: item.priceBeforeTax
-        });
-        return acc;
-      }, {});
-    
-      // Prepare the data to be sent to the PHP script
-      const dataToSend = {
-        reference: Object.keys(groupedData), // Get the references
-        items: groupedData, // Grouped items
-      };
-    
-      post("function/purchase-order-entry.php", dataToSend).then((Data) => {
-        console.log(Data);
-      });
-})
+placeDirectGrnButton.addEventListener("click", () => {
+  const groupedData = directGrnItems.reduce((acc, item) => {
+    if (!acc[item.reference]) {
+      acc[item.reference] = []; // Create a new array for this reference
+    }
+    acc[item.reference].push({
+      supplier: item.supplier,
+      orderDate: item.orderDate,
+      currency: item.currency,
+      exchangeRate: item.exchangeRate,
+      supplierReference: item.supplierReference,
+      dimensions: item.dimensions,
+      receiveInto: item.receiveInto,
+      deliverTo: item.deliverTo,
+      itemCode: item.itemCode,
+      description: item.description,
+      quantity: item.quantity,
+      unit: item.unit,
+      requiredDeliveryDate: item.requiredDeliveryDate,
+      priceBeforeTax: item.priceBeforeTax,
+    });
+    return acc;
+  }, {});
+
+  // Prepare the data to be sent to the PHP script
+  const dataToSend = {
+    reference: Object.keys(groupedData), // Get the references
+    items: groupedData, // Grouped items
+  };
+
+  post("function/direct-grn.php", dataToSend).then((Data) => {
+    console.log(Data);
+  });
+});
 
 

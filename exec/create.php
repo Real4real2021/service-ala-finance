@@ -89,7 +89,7 @@ mysqli_query($con, $createBranchesTable) or die(mysqli_error($con));
 $createSalesOrderEntriesTable = "
 CREATE TABLE IF NOT EXISTS sales_order_entries (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    referance VARCHAR(25) NOT NULL,
+    reference VARCHAR(25) NOT NULL,
     itemCode VARCHAR(25) NOT NULL,
     description TEXT,
     quantity INT NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS customer_payments (
     branch VARCHAR(25),
     bankAccount VARCHAR(25),
     transactionDate DATE NOT NULL,
-    referance VARCHAR(25),
+    reference VARCHAR(25),
     bankCharge DECIMAL(10, 2),
     dimensions VARCHAR(25),
     paymentDiscount DECIMAL(5, 2),
@@ -122,7 +122,7 @@ mysqli_query($con, $createCustomerPaymentsTable) or die(mysqli_error($con));
 $createDirectDeliveryTable = "
 CREATE TABLE IF NOT EXISTS direct_delivery (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    referance VARCHAR(25) NOT NULL,
+    reference VARCHAR(25) NOT NULL,
     itemCode VARCHAR(25) NOT NULL,
     description TEXT,
     quantity INT NOT NULL,
@@ -137,7 +137,7 @@ mysqli_query($con, $createDirectDeliveryTable) or die(mysqli_error($con));
 $createDirectInvoiceTable = "
 CREATE TABLE IF NOT EXISTS direct_invoice (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    referance VARCHAR(25) NOT NULL,
+    reference VARCHAR(25) NOT NULL,
     itemCode VARCHAR(25) NOT NULL,
     description TEXT,
     quantity INT NOT NULL,
@@ -151,7 +151,7 @@ mysqli_query($con, $createDirectInvoiceTable) or die(mysqli_error($con));
 $createSalesQuotationEntriesTable = "
 CREATE TABLE IF NOT EXISTS sales_quotation_entries (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    referance VARCHAR(25) NOT NULL,
+    reference VARCHAR(25) NOT NULL,
     itemCode VARCHAR(25) NOT NULL,
     description TEXT,
     quantity INT NOT NULL,
@@ -170,7 +170,7 @@ mysqli_query($con, $createSalesQuotationEntriesTable) or die(mysqli_error($con))
 $createPurchaseOrderEntriesTable = "
 CREATE TABLE IF NOT EXISTS purchase_order_entries (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    referance VARCHAR(25) NOT NULL,
+    reference VARCHAR(25) NOT NULL,
     supplierReference VARCHAR(25),
     dimensions VARCHAR(25),
     receiveInto VARCHAR(25),
@@ -187,6 +187,28 @@ CREATE TABLE IF NOT EXISTS purchase_order_entries (
 )";
 
 mysqli_query($con, $createPurchaseOrderEntriesTable) or die(mysqli_error($con));
+
+$createGRNENtriesTable = "
+CREATE TABLE IF NOT EXISTS grn_entries (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    supplier VARCHAR(25),
+    reference VARCHAR(25) NOT NULL,
+    orderDate DATE NOT NULL,
+    currency VARCHAR(25) NOT NULL,
+    exchangeRate INT(25) NOT NULL,
+    supplierReference VARCHAR(25),
+    dimensions VARCHAR(25),
+    receiveInto VARCHAR(25),
+    deliverTo VARCHAR(25),
+    itemCode VARCHAR(25) NOT NULL,
+    description TEXT,
+    quantity INT NOT NULL,
+    unit VARCHAR(25),
+    requiredDeliveryDate DATE,
+    priceBeforeTax DECIMAL(10, 2)
+)"; 
+
+mysqli_query($con, $createGRNENtriesTable) or die(mysqli_error($con));
 
 // Close the database connection
 mysqli_close($con);
