@@ -83,7 +83,6 @@ function renderTable () {
         <th>Currency</th>
         <th>Order Total</th>
         <tbody id="table-body">
-            <td>No record</td>
         </tbody>
     </table>
     `
@@ -97,18 +96,14 @@ async function searchOutstandingPurchaseOrders () {
     data.forEach((order)=> {
         let html = `
         <tr>
+            <td>${order.id}</td>
             <td>${order.reference}</td>
-            <td>${order.supplierReference}</td>
             <td>${order.supplier}</td>
-            <td>${order.dimensions}</td>
-            <td>${order.receiveInto}</td>
             <td>${order.deliverTo}</td>
-            <td>${order.itemCode}</td>
-            <td>${order.description}</td>
-            <td>${order.quantity}</td>
-            <td>${order.unit}</td>
-            <td>${order.requiredDeliveryDate}</td>  
-            <td>${order.priceBeforeTax}</td>    
+            <td>${order.supplierReference}</td>
+            <td>${order.date}</td>
+            <td>${order.currency}</td>
+            <td>${order.priceBeforeTax}</td>
         </tr>
         `
         tableBody.innerHTML += html;

@@ -131,6 +131,7 @@ addItemButton.addEventListener("click", () => {
     date: date.value
   });
 
+    console.log(directInvoiceItems)
   // console.log(directInvoiceItems)
 
   const newRowHTML = `

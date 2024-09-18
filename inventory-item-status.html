@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Item Status</title>
+</head>
+<body>
+    <h1>Inventory Item Status</h1>
+    <div id="input-div">
+        <label for="item-code">Item Code:
+            <input type="text" id="item-code-input">
+        </label>
+        <select name="item-selector" id="item-selector">
+            <option value="all-items">All Items</option>
+        </select>
+    </div>
+    <div id="table-div">
+        <table>
+            <th>Location</th>
+            <th>Quantity on Hand</th>
+            <th>Re-Order Level</th>
+            <th>Demand</th>
+            <th>Available</th>
+            <th>On Order</th>
+        </table>
+        <tbody>
+
+        </tbody>
+    </div> 
+</body>
+<script src="scripts/Items and Inventory/inventory-item-status.js"></script>
+</html>

@@ -210,6 +210,91 @@ CREATE TABLE IF NOT EXISTS grn_entries (
 
 mysqli_query($con, $createGRNENtriesTable) or die(mysqli_error($con));
 
+$createDirectSupplierInvoiceEntriesTable = "
+CREATE TABLE IF NOT EXISTS direct_supplier_invoice_entries (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    supplier VARCHAR(25),
+    reference VARCHAR(25) NOT NULL,
+    orderDate DATE NOT NULL,
+    currency VARCHAR(25) NOT NULL,
+    exchangeRate INT(25) NOT NULL,
+    supplierReference VARCHAR(25),
+    dimensions VARCHAR(25),
+    receiveInto VARCHAR(25),
+    deliverTo VARCHAR(25),
+    itemCode VARCHAR(25) NOT NULL,
+    description TEXT,
+    quantity INT NOT NULL,
+    unit VARCHAR(25),
+    requiredDeliveryDate DATE,
+    priceBeforeTax DECIMAL(10, 2)
+)";
+
+mysqli_query($con, $createDirectSupplierInvoiceEntriesTable) or die(mysqli_error($con));
+
+$paymentToSupplierTable = "
+CREATE TABLE IF NOT EXISTS payment_to_supplier (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    paymentTo VARCHAR(25) NOT NULL,
+    fromBankAccount VARCHAR(25) NOT NULL,
+    bankBalance DECIMAL(10, 2) NOT NULL,
+    datePaid DATE NOT NULL,
+    reference VARCHAR(25) NOT NULL,
+    bankCharge DECIMAL(10, 2) NOT NULL,
+    dimensions VARCHAR(25),
+    discountAmount DECIMAL(10, 2),
+    paymentAmount DECIMAL(10, 2),
+    memo TEXT
+)";
+
+mysqli_query($con, $paymentToSupplierTable) or die(mysqli_error($con));
+
+
+$createSupplierInvoicesTable = "
+CREATE TABLE IF NOT EXISTS supplier_invoices (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    reference VARCHAR(25) NOT NULL,
+    supplier VARCHAR(25) NOT NULL,
+    date DATE NOT NULL,
+    supplierRef VARCHAR(25),
+    dueDate DATE NOT NULL,
+    paymentTerms VARCHAR(25) NOT NULL,
+    dimensions VARCHAR(25),
+    supplierCurrency VARCHAR(25) NOT NULL,
+    exchangeRate INT(25) NOT NULL,
+    taxGroup VARCHAR(25) NOT NULL,
+    currentCredit DECIMAL(10, 2) NOT NULL,
+    account VARCHAR(25) NOT NULL,
+    name VARCHAR(25) NOT NULL,
+    dimension VARCHAR(25),
+    amount DECIMAL(10, 2) NOT NULL,
+    memo TEXT
+)";
+
+mysqli_query($con, $createSupplierInvoicesTable) or die(mysqli_error($con));
+
+$createSupplierCreditNotesTable = "
+CREATE TABLE IF NOT EXISTS supplier_credit_notes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    reference VARCHAR(25) NOT NULL,
+    supplier VARCHAR(25) NOT NULL,
+    date DATE NOT NULL,
+    supplierRef VARCHAR(25),
+    dueDate DATE NOT NULL,
+    paymentTerms VARCHAR(25) NOT NULL,
+    dimensions VARCHAR(25),
+    supplierCurrency VARCHAR(25) NOT NULL,
+    exchangeRate INT(25) NOT NULL,
+    taxGroup VARCHAR(25) NOT NULL,
+    currentCredit DECIMAL(10, 2) NOT NULL,
+    account VARCHAR(25) NOT NULL,
+    name VARCHAR(25) NOT NULL,
+    dimension VARCHAR(25),
+    amount DECIMAL(10, 2) NOT NULL,
+    memo TEXT
+)";
+
+mysqli_query($con, $createSupplierCreditNotesTable) or die(mysqli_error($con));
 // Close the database connection
 mysqli_close($con);
 echo json_encode("Tables created successfully.");
