@@ -295,6 +295,131 @@ CREATE TABLE IF NOT EXISTS supplier_credit_notes (
 )";
 
 mysqli_query($con, $createSupplierCreditNotesTable) or die(mysqli_error($con));
+
+$createInventoryLocationTable = "
+CREATE TABLE IF NOT EXISTS inventory_location (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    locationCode VARCHAR(25) NOT NULL,
+    locationName VARCHAR(25) NOT NULL,
+    contactForDeliveries VARCHAR(25),
+    address TEXT,
+    telephone VARCHAR(25),
+    secondaryTelephone VARCHAR(25),
+    email VARCHAR(25)
+)";
+
+mysqli_query($con, $createInventoryLocationTable) or die(mysqli_error($con));
+
+$createInventoryLocationTransferTable = "
+CREATE TABLE IF NOT EXISTS inventory_location_transfer (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    reference VARCHAR(25),
+    fromLocation VARCHAR(25),
+    toLocation VARCHAR(25),
+    transferDate DATE,
+    itemCode VARCHAR(25),
+    inventoryItem VARCHAR(25),
+    quantity INT,
+    unit VARCHAR(25)
+)";
+
+mysqli_query($con, $createInventoryLocationTransferTable) or die(mysqli_error($con));
+
+$createInventoryAdjustmentTable = "
+CREATE TABLE IF NOT EXISTS inventory_adjustment (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    reference VARCHAR(25),
+    location VARCHAR(25),
+    date DATE,
+    itemCode VARCHAR(25),
+    inventoryItem VARCHAR(25),
+    QOH INT,
+    quantity INT,
+    unit VARCHAR(25),
+    unitCost DECIMAL(10, 2),
+    total DECIMAL(10, 2),
+    memo VARCHAR(25)
+)"; 
+
+mysqli_query($con, $createInventoryAdjustmentTable) or die(mysqli_error($con));
+
+
+$createSalesPricingTable = "
+CREATE TABLE IF NOT EXISTS sales_pricing (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    currency VARCHAR(25) NOT NULL,
+    salesType VARCHAR(25) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
+)";
+
+mysqli_query($con, $createSalesPricingTable) or die(mysqli_error($con));
+
+$createPaymentsTable = "
+CREATE TABLE IF NOT EXISTS payments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    date DATE NOT NULL,
+    payTo VARCHAR(25) NOT NULL,
+    toTheOrderOf VARCHAR(25) NOT NULL,
+    payFrom VARCHAR(25) NOT NULL,
+    bankBalance DECIMAL(10, 2) NOT NULL,
+    accountCode VARCHAR(25) NOT NULL,
+    accountDescription VARCHAR(25) NOT NULL,
+    dimension VARCHAR(25) NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    memo TEXT
+)";
+
+mysqli_query($con, $createPaymentsTable) or die(mysqli_error($con));
+
+$createDepositsTable = "
+CREATE TABLE IF NOT EXISTS deposits (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    depositDate DATE NOT NULL,
+    payFrom VARCHAR(25) NOT NULL,
+    name VARCHAR(25) NOT NULL,
+    payInto VARCHAR(25) NOT NULL,
+    accountCode VARCHAR(25) NOT NULL,
+    accountDescription VARCHAR(25) NOT NULL,
+    dimension VARCHAR(25) NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    memo TEXT
+)";
+
+mysqli_query($con, $createDepositsTable) or die(mysqli_error($con));
+
+$createBankAccountTransferTable = "
+CREATE TABLE IF NOT EXISTS bank_account_transfer (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fromAccount VARCHAR(25) NOT NULL,
+    amount VARCHAR(25) NOT NULL,
+    bankBalance DECIMAL(10, 2) NOT NULL,
+    bankCharge DECIMAL(10, 2) NOT NULL,
+    toAccount DECIMAL(10, 2) NOT NULL,
+    memo VARCHAR(25) NOT NULL,
+    reference VARCHAR(25) NOT NULL,
+    dimension VARCHAR(25) NOT NULL
+)";
+
+mysqli_query($con, $createBankAccountTransferTable) or die(mysqli_error($con));
+
+$createJournalEntriesTable = "
+CREATE TABLE IF NOT EXISTS journal_entries (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    currency VARCHAR(25) NOT NULL,
+    documentDate DATE NOT NULL,
+    eventDate DATE NOT NULL,
+    sourceRef VARCHAR(25) NOT NULL,
+    includeInTaxRegister BOOLEAN DEFAULT FALSE,
+    accountCode VARCHAR(25) NOT NULL,
+    accountDescription VARCHAR(25) NOT NULL,
+    dimension VARCHAR(25) NOT NULL,
+    debit DECIMAL(10, 2) NOT NULL,
+    credit DECIMAL(10, 2) NOT NULL,
+    memo VARCHAR(25) NOT NULL
+)   
+";
+
+mysqli_query($con, $createJournalEntriesTable) or die(mysqli_error($con));
 // Close the database connection
 mysqli_close($con);
 echo json_encode("Tables created successfully.");

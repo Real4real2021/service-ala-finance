@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Account Inquiry</title>
+</head>
+<body>
+    <h1>Bank Account Inquiry</h1>
+
+    <div id="input-div">
+        <label for="Account">Account:
+            <select name="" id="account-selector"></select>
+        </label>
+        <label for="from">From:
+            <input type="date" name="" id="from-date-input">
+        </label>
+        <label for="to">To:
+            <input type="date" name="" id="to-date-input">
+        </label>
+        <input type="button" value="Show" id="show-button">
+    </div>
+    <div id="table-div">
+        <table>
+            <th>Type</th>
+            <th>#</th>
+            <th>Reference</th>
+            <th>Date</th>
+            <th>Debit</th>
+            <th>Credit</th>
+            <th>Balance</th>
+            <th>Person/Item</th>
+            <th>Memo</th>
+            <tbody>
+                <tr>
+                    <td colspan="4">Opening Balance - 19/09/2024</td>
+                    <td></td>
+                    <td>500.00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="4">Ending Balance - 19/10/2024</td>
+                    <td>0.00</td>
+                    <td>500.00</td>
+                    <td>500.00</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="banking-and-general-ledger.html">Back</a>
+</body>
+</html>

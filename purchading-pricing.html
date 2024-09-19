@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchasing Pricing</title>
+</head>
+<body>
+    <h1>Supplier Purchasing Data</h1>
+    <div id="input-div">
+        <label for="item">Item:
+            <input type="text" name="" id="item-code-input">
+        </label>
+        <select name="" id="item-selector">
+            <option value="all-items">All Items</option>
+        </select>
+    </div>
+    <div id="first-table">
+        <table>
+            <th>Supplier</th>
+            <th>Price</th>
+            <th>currency</th>
+            <th>Supplier's Unit</th>
+            <th>Conversion Factor</th>
+            <th>Supplier's Description</th>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><input type="button" value="Edit" id="edit-button"></td>
+                    <td><input type="button" value="Delete" id="delete-button"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="second-table">
+        <table>
+            <tr>
+                <td>Supplier:</td>
+                <td><select name="" id="supplier-selector"></select></td>
+            </tr>
+            <tr>
+                <td>Price:</td>
+                <td><input type="text" name="" id="price-input"></td>
+            </tr>
+            <tr>
+                <td>Suppliers Unit of Measuer:</td>
+                <td><input type="text" name="" id="suppliers-unit-of-measure-input"></td>
+            </tr>
+            <tr>
+                <td>Conversion Factor:</td>
+                <td><input type="text" name="" id="conversion-factor-input"></td>
+            </tr>
+            <tr>
+                <td>Suppliers Code or Description:</td>
+                <td><input type="text" name="" id="suppliers-code-or-description-input"></td>
+            </tr>
+        </table>
+    </div>
+    <input type="button" value="Add New" id="add-new-button"><br>    
+    <a href="items-and-inventory.html">Back</a>
+</body>
+</html>
